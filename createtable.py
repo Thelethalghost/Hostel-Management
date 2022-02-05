@@ -5,17 +5,15 @@ import pandas as pd
 db = mc.connect(
     host="localhost",
     user="root",
-    passwd="root",
-    database="Hostels"
+    passwd="root"
 )
 
 myc = db.cursor(buffered=True)
 
-myc.execute("SELECT * from hostels")  # do not comment out this query
-hostels_names = [x[1] for x in myc]
-myc.execute("SELECT * from hostels")
-hostels_id = [x[0] for x in myc]
-
+# myc.execute("SELECT * from hostels")
+# hostels_names = [x[1] for x in myc]
+# myc.execute("SELECT * from hostels")
+# hostels_id = [x[0] for x in myc]
 
 def createdatabase():
     myc.execute("CREATE DATABASE Hostels")
@@ -55,7 +53,7 @@ def add_data_students():
         # print(row)
         db.commit()
 
-def add_data_hotels_name():
+def add_data_hotels_students():
     for i in hostels_id:
         myc.execute(f"SELECT Adminno, Name,Age,Class,Sex,Hostel_ID FROM students where Hostel_ID = {i}")
         name = hostels_names[i-1]
@@ -67,7 +65,6 @@ def add_data_hotels_name():
             # print(name)
             # print(x)
 
-
 def add_new_data():
     while True:
         ask = input("Enter the name of the hostel name in which you want add the student: ")
@@ -78,7 +75,6 @@ def add_new_data():
         classe = int(input("Enter the class of the student: "))
         gender = input("Enter the gender of the student(Male,Female): ")
         myc.execute(f"INSERT INTO {ask}(Adminno,Student_name,Age,Class,Sex,Hostel_ID) values(%s,%s,%s,%s,%s,%s)",(adminno,name,age,classe,gender,hostelid))
-        pass
 
 def delete():
     ask = input("Enter the name of the hostel you want to delete data from: ")
@@ -96,37 +92,65 @@ def modify_data():
 
     for i in range(how):
         modify(ask)
-    pass
 
 def search():
     num = int(input("Enter the adminno of the student you want the data of: "))
     id = myc.execute(f"SELECT Hostel_ID FROM Students WHERE Adminno = {num}")
     hostel_name = myc.execute(f"SELECT Name FROM Hostels WHERE Hostel_Id = {id}")
     myc.execute(f"SELECT * FROM Hostels WHERE Adminno = {num}")
-    pass
 
 def  display():
     ask  = input("Enter the name of the hostel you want to see the data of (Don't use space use underscore(_)):  ")
     myc.execute(f"SELECT * FROM {ask}")
 
-# createdatabase()
+def startup():
+    try:
+        createdatabase()
+        print("in the conection after root add a , and add database='Hostels'")
+        print("After adding run startup_2 by removing the hash'#'")
+        print("Add hash in the starting of the line containg startup()")
 
-# createtables()
 
-# add_data_hostels()
+    except Exception:
+        print("in the conection after root add a , and add database='Hostels'")
+        print("After adding run startup_2 by removing the hash'#'")
+        print("Add hash in the starting of the line containg startup()")
 
-# create_tables_hostels()
+def startup_2():
+    createtables()
+    add_data_hostels()
+    print("Unhash the first four hashed lines")
+    print("Unhash startup_3 and hash startup_2 and run again")
 
-# add_data_students()
+def startup_3():
+    add_data_students()
+    create_tables_hostels()
+    add_data_hotels_students()
+    print('Hash the startup_3() line and unhash the ready line and run to start using this sytem')
 
-# add_data_hotels_name()
+def ready():
+    ask = input("1. Add Student\n"
+                "2. Search for a student\n"
+                "3. Modify data\n"
+                "4. Display data\n"
+                "5. Delete data\n"
+                "Enter the option you want to select: ")
+    if ask == 1:
+        add_new_data()
+    elif ask == 2:
+        search()
+    elif ask == 3:
+        modify_data()
+    elif ask == 4 :
+        display()
+    elif ask == 5:
+        delete()
+    else:
+        print("No recognizable option entered")
 
-#  add_data()
 
-# delete()
 
-# modify_data()
-
-# search()
-
-# display()
+startup()
+# startup_2()
+# startup_3()
+# ready()
