@@ -86,10 +86,13 @@ def modify_data():
     ask = input("enter the hostel name you want to change the data of: ")
     how = int(input("How many columns do you want to modify: "))
     def modify(table_name):
+        admi = int_input("Enter the admin number of the student you want to change the data of: ")
         column_name = input("Enter the column name you want to change the data of: ")
         data = input("What do you want to write: ")
-        myc.execute(f"UPDATE {table_name} SET {column_name} = {data}")
-
+        try:
+            myc.execute(f"UPDATE {table_name} SET {column_name} = {data} WHERE adminno = {admi}")
+        except Exception:
+            print("Wrong admin number or column name entered. Please try again")
     for i in range(how):
         modify(ask)
 
@@ -150,7 +153,7 @@ def ready():
 
 
 
-startup()
+# startup()
 # startup_2()
 # startup_3()
 # ready()
