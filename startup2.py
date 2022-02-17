@@ -29,19 +29,21 @@ def add_data_hostels():
 
     db.commit()
 
-try:
-    createtables()
-
+def run():
     try:
-        add_data_hostels()
-        print(
-            'Please make sure that hostel id field in the csv file has only the numbers you have entered now. If not please change it')
-    except:
-        print(
-            'Please make sure that hostel id field in the csv file has only the numbers you have entered now. If not please change it')
-except Exception:
-    print('Tables Already created. Run startup3.py')
-    myc.execute('SELECT Hostel_ID FROM Hostels')
-    hostelids = [x[0] for x in myc]
-    print(hostelids)
-    print('Please make sure that hostel ids in the studentsfakedata.csv file is in the range of number that are printed above')
+        createtables()
+
+        try:
+            add_data_hostels()
+            print(
+                'Please make sure that hostel id field in the csv file has only the numbers you have entered now. If not please change it')
+        except:
+            print(
+                'Please make sure that hostel id field in the csv file has only the numbers you have entered now. If not please change it')
+    except Exception:
+        import startup3
+        startup3.run()
+        myc.execute('SELECT Hostel_ID FROM Hostels')
+        hostelids = [x[0] for x in myc]
+        print(hostelids)
+        print('Please make sure that hostel ids in the studentsfakedata.csv file is in the range of number that are printed above')
