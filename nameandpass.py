@@ -13,7 +13,7 @@ def takename_passwd():
         wr.writerow(data)
 
 
-# takename_passwd()
+takename_passwd()
 
 with open('npassformysql.csv','r') as file:
     rd = csv.reader(file)
