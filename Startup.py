@@ -1,17 +1,18 @@
 import mysql.connector as mc
 from nameandpass import name,passwd
+import startup2
 
 db = mc.connect(
     host = 'localhost',
-    user = {name},
-    passwd = {passwd}
+    user = name,
+    passwd = passwd
 )
 
-myc = db.cursor()
+myc = db.cursor(buffered=True)
 
 try:
-    myc.execute('CREATE DATABASE Hostels')
-    print('Now run startup2.py')
+    myc.execute('CREATE DATABASE Hostels_Management')
+    startup2.run()
 except Exception:
-    print('Database already present\n Run startup2.py')
+    startup2.run()
 
