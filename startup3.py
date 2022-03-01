@@ -43,15 +43,12 @@ def run():
                 print('Data Entered')
             except:
                 print('Data Already Entered')
-                print('Run Ready.py')
         except:
             try:
                 add_data_hotels_students()
                 print('Data Entered')
             except:
                 print('Data Already entered')
-                print('Run Ready.py')
-        print('Run Ready.py')
     except Exception:
         try:
             add_data_students()
@@ -60,12 +57,12 @@ def run():
                 print('Data Entered')
             except:
                 print('Data Already Entered')
-                print('Run Ready.py')
         except:
             try:
                 add_data_hotels_students()
                 print('Data Entered')
             except:
                 print('Data Already entered')
-                print('Run Ready.py')
-        print('Run Ready.py')
+        print("Data Already Entered")
+        
+print("Run Hostelmanagement.py.py")
